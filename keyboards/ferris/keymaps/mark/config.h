@@ -28,6 +28,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // When holding and releasing a dual-function key will result in nothing being triggered.
 #define RETRO_TAPPING
+#define RETRO_TAPPING_PER_KEY
 
 // Define a keycode which cancels a modifier - like GUI or ALT
 #define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_RIGHT_CTRL

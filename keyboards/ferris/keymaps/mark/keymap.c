@@ -12,7 +12,7 @@
 #define UK_QUOT KC_QUOT // '
 #define UK_AT   S(UK_QUOT) // @
 #define UK_GRV  KC_GRV  // `
-#define UK_NOT  S(UK_GRV)  // ¬
+#define UK_TILD S(UK_HASH) // ~
 
 // qmk flash -kb ferris/sweep -km mark -c -e CONVERT_TO=promicro_rp2040 -bl uf2-split-left
 
@@ -49,7 +49,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           KC_TAB,          UK_GRV,          KC_EQL,          KC_MINS,         KC_DLR,              KC_CIRC,      LSFT(KC_LBRC),   LSFT(KC_RBRC),     KC_COLN,         KC_ENTER,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||------ ~~ ------|-------**-------|-------<<-------|------->>-------|-------@@-------|| ||-------##-------|-------((-------|-------))-------|-------..-------|-------XX-------||
-          UK_NOT,          KC_ASTR,          KC_LT,           KC_GT,           UK_AT,              UK_HASH,         KC_LPRN,         KC_RPRN,         KC_DOT,         XXXXXXX,
+          UK_TILD,          KC_ASTR,          KC_LT,           KC_GT,           UK_AT,              UK_HASH,         KC_LPRN,         KC_RPRN,         KC_DOT,         XXXXXXX,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
 		    					                            TO(_BASE),        KC_LCTL,            KC_LSFT,         TO(_NUM)
@@ -58,14 +58,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV] = LAYOUT(
 
-// ||----<ESCAPE>----|-----<MUTE>-----|----<PAUSE>-----|-----<PAUSE>----|---<ALT-TAB>----|| ||---<REFRESH>----|-----<BACK>-----|---<FORWARD>----|--<FAVOURITES>--|-<CTRL-ALT-DEL>-||
-        KC_ESCAPE,         KC_MUTE,        KC_MPLY,         KC_MPLY,        A(KC_TAB),            KC_WREF,         KC_WBAK,        KC_WFWD,          KC_WFAV,       C(A(KC_DEL)),
+// ||----<ESCAPE>----|-----<MUTE>-----|----<PAUSE>-----|--<SHIFT-TAB>---|-----<TAB>------|| ||---<REFRESH>----|-----<BACK>-----|---<FORWARD>----|--<FAVOURITES>--|-<CTRL-ALT-DEL>-||
+        KC_ESCAPE,         KC_MUTE,        KC_MPLY,        S(KC_TAB),        KC_TAB,              KC_WREF,          KC_WBAK,        KC_WFWD,          KC_WFAV,       C(A(KC_DEL)),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
-// ||---<CTRL-TAB>---|-----<PREV>-----|-----<NEXT>-----|--<ARROW-LEFT>--|--<ARROW-RGHT>--|| ||--<ARROW-DOWN>--|---<ARROW-UP>---|--<ARROW-LEFT>--|--<ARROW-RGHT>--|----<ENTER>-----||
-         _______,         KC_MPRV,         KC_MNXT,        C(KC_LEFT),      C(KC_RGHT),           KC_LEFT,          KC_DOWN,         KC_UP,           KC_RGHT,        KC_ENTER,
+// ||-----<ALT>------|-----<PREV>-----|-----<NEXT>-----|--<ARROW-LEFT>--|--<ARROW-RGHT>--|| ||--<ARROW-DOWN>--|---<ARROW-UP>---|--<ARROW-LEFT>--|--<ARROW-RGHT>--|----<ENTER>-----||
+         KC_LALT,         KC_MPRV,         KC_MNXT,        C(KC_LEFT),      C(KC_RGHT),           KC_LEFT,          KC_DOWN,         KC_UP,           KC_RGHT,        KC_ENTER,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||----<SLEEP>-----|-----<CUT>------|-----<COPY>-----|-----<PASTE>----|---<CTRL-TAB>---|| ||-<PRINT-SCREEN>-|---<SNIPPET>----|--<CALCULATOR>--|--<MYCOMPUTER>--|----------------||
-         KC_SLEP,          KC_CUT,         KC_COPY,         KC_PSTE,        C(KC_TAB),           KC_PSCR,          G(S(KC_S)),       KC_CALC,         KC_MYCM,        XXXXXXX,
+         KC_SLEP,          KC_CUT,         KC_COPY,         KC_PSTE,        C(KC_TAB),            KC_PSCR,        G(S(KC_S)),       KC_CALC,         KC_MYCM,        XXXXXXX,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
 		    					                            TO(_BASE),        KC_LGUI,             KC_LSFT,         TO(_NUM)
@@ -80,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_ASTR,           KC_4,            KC_5,            KC_6,           KC_PLUS,            _______,         _______,         _______,         _______,          _______,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------//-------|-------11-------|-------22-------|-------33-------|-------00-------|| ||-------££-------|-------$$-------|-------€€-------|------ .. ------|----------------||
-         KC_SLSH,            KC_1,            KC_2,            KC_3,            KC_0,               UK_PND,          UK_DLR,         UK_EURO,          KC_DOT,          _______,
+         KC_SLSH,           KC_1,            KC_2,            KC_3,            KC_0,               UK_PND,          UK_DLR,         UK_EURO,          KC_DOT,          _______,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
 		    					                            TO(_BASE),        KC_LGUI,             KC_LSFT,      TO(_FUNC)
@@ -150,6 +150,21 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+// ensure RETRO_TAPPING is not applied to C, V, X, Enter or BackSpace
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    // Don't retro tap for these keys.
+    case LT(0, KC_C):
+    case LT(0, KC_V):
+    case LT(0, KC_X):
+    case LT(0, KC_SPC):
+    case LT(0, KC_BSPC):
+      return false;
+
+    default:
+      return true;  // Enable retro tap otherwise.
+  }
+}
 
 
 
