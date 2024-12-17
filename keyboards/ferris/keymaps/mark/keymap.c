@@ -1,4 +1,4 @@
-/*#include QMK_KEYBOARD_H*/
+#include QMK_KEYBOARD_H
 // add some of the UK keycodes - ie £ and €
 #define UK_2    KC_2    // 2
 #define UK_3    KC_3    // 3
