@@ -14,12 +14,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+// this just ensures we are overwriting any other config file relevant to our keymaps
 #pragma once
 
 // The time in milliseconds of when a tap becomes a hold
 #undef TAPPING_TERM
-#define TAPPING_TERM 250
+#define TAPPING_TERM 200
 
 
 // The time in milliseconds for a double tap and hold to output string of letters
@@ -39,5 +39,5 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define EE_HANDS
 
-// #define ONESHOT_TAP_TOGGLE 2
+// #define ONESHOT_TAP_TOGGLE 25
 // #define ONESHOT_TIMEOUT 5000
