@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // The time in milliseconds of when a tap becomes a hold
 #undef TAPPING_TERM
 #define TAPPING_TERM 200
-
+#define TAPPING_TERM_PER_KEY
 
 // The time in milliseconds for a double tap and hold to output string of letters
 // is you wanted to type llllllllllll, but had LSFT_T(KC_L), you need to tap L twice
