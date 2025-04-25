@@ -14,11 +14,25 @@
 #define UK_GRV  KC_GRV  // `
 #define UK_TILD S(UK_HASH) // ~
 
+// example command on how to flash drives
 // qmk flash -kb ferris/sweep -km mark -c -e CONVERT_TO=promicro_rp2040 -bl uf2-split-left
 
+
+// OVERVIEW of FILE
+//
+// LAYERS
+// COMBOS
+// HELD KEYS
+// RETRO TAPPING
+// TAPPING TERM
+// TAPDANCE
+
+
+// LAYERS
 // add number layer, and maybe a macro layer too
 enum layers {
-    _BASE,
+    _QWER,
+    _COLE,
     _SYM,
     _NAV,
     _NUM,
@@ -30,11 +44,10 @@ enum tap_dance_codes {
     SYM_D,
     NUM_D,
     NAV_D,
-    BASE_D
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_BASE] = LAYOUT(
+  [_QWER] = LAYOUT(
 // ||-------QQ-------|-------WW-------|-------EE-------|-------RR-------|-------TT-------|| ||-------YY-------|-------UU-------|-------II-------|-------OO-------|-------PP-------||
            KC_Q,            KC_W,            KC_E,            KC_R,            KC_T,                KC_Y,            KC_U,            KC_I,            KC_O,            KC_P,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
@@ -43,6 +56,21 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------ZZ-------|-------XX-------|-------CC-------|-------VV-------|-------BB-------|| ||-------NN-------|-------MM-------|-------,<-------|-------.>-------|-------/?-------||
            KC_Z,         LT(0, KC_X),    LT(0, KC_C),     LT(0, KC_V),         KC_B,                KC_N,            KC_M,           KC_COMM,         KC_DOT,         KC_SLSH,
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------------------------------------------------||----------------|----<SPACE>-----|| ||--<BACKSPACE>---|----------------||
+		    					                            TD(NUM_D),    LT(0, KC_SPACE),    LT(0, KC_BSPC),     TD(SYM_D)
+// ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
+    ),
+
+  [_COLE] = LAYOUT(
+// ||-------QQ-------|-------WW-------|-------FF-------|-------PP-------|-------BB-------|| ||-------JJ-------|-------LL-------|-------UU-------|-------YY-------|-------;;-------||
+           KC_Q,            KC_W,            KC_F,            KC_P,            KC_B,                KC_J,            KC_L,            KC_U,            KC_Y,           KC_SCLN,
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------AA-------|-------RR-------|-------SS-------|-------TT-------|-------GG-------|| ||-------MM-------|-------NN-------|-------EE-------|-------II-------|-------OO-------||
+       LGUI_T(KC_A),    LALT_T(KC_R),    LSFT_T(KC_S),    LCTL_T(KC_T),        KC_G,                KC_M,        RCTL_T(KC_N),    RSFT_T(KC_E),    LALT_T(KC_I),    RGUI_T(KC_O),
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------XX-------|-------XX-------|-------CC-------|-------DD-------|-------VV-------|| ||-------KK-------|-------HH-------|-------,<-------|-------.>-------|-------/?-------||
+           KC_Z,         LT(0, KC_X),     LT(0, KC_C),        KC_D,        LT(0, KC_V),             KC_K,            KC_H,           KC_COMM,         KC_DOT,         KC_SLSH,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|----<SPACE>-----|| ||--<BACKSPACE>---|----------------||
 		    					                            TD(NUM_D),    LT(0, KC_SPACE),    LT(0, KC_BSPC),     TD(SYM_D)
@@ -60,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
           UK_GRV,          KC_LT,           KC_GT,          KC_ASTR,          UK_AT,               UK_HASH,        S(KC_LBRC),     S(KC_RBRC),       UK_TILD,         KC_AMPR,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
-                                                           TO(_BASE),    LCTL_T(KC_SPACE),    LSFT_T(KC_BSPC),     TD(NUM_D)
+                                                           TG(_SYM),    LCTL_T(KC_SPACE),    LSFT_T(KC_BSPC),     TD(NUM_D)
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     ),
 
@@ -76,7 +104,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          TO(_FUNC),        C(KC_X),         C(KC_C),         C(KC_V),        C(KC_TAB),          G(S(KC_S)),       KC_PGDN,         KC_PGUP,         KC_PSCR,          TO(_SYM),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
-		    					                           TO(_BASE),        KC_LGUI,             KC_LSFT,         TO(_NUM)
+		    					                           TG(_NAV),        KC_LGUI,             KC_LSFT,         TO(_NUM)
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     ),
 
@@ -90,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          KC_SLSH,           KC_1,            KC_2,            KC_3,          KC_MINUS,             KC_CIRC,          KC_PERC,       KC_COMM,          KC_DOT,         TO(_FUNC),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
-		    					                            TO(_BASE),        KC_LGUI,             KC_LSFT,       TO(_SYM)
+		    					                            TG(_NUM),        KC_LGUI,             KC_LSFT,       TO(_SYM)
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     ),
 
@@ -105,27 +133,41 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
          XXXXXXX,           KC_F1,           KC_F2,           KC_F3,          KC_F10,           C(A(KC_DEL)),      XXXXXXX,         XXXXXXX,         XXXXXXX,          XXXXXXX,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
-		    					                            TO(_BASE),        KC_LALT,             KC_LSFT,        TO(_NAV)
+		    					                            TG(_FUNC),        KC_LALT,             KC_LSFT,        TO(_NAV)
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     )
 };
-// COMBOS
 
+
+// COMBOS
 const uint16_t PROGMEM bootloader_1[] = {KC_F10, KC_F12, COMBO_END};
 const uint16_t PROGMEM bootloader_2[] = {KC_SLEP, LCTL(LALT(KC_DEL)), COMBO_END};
 const uint16_t PROGMEM single_quote[] = {KC_COMM, KC_DOT, COMBO_END};
-const uint16_t PROGMEM jump_to_nav[] =  {KC_M, KC_COMM, COMBO_END};
-const uint16_t PROGMEM jump_to_nav2[] = {KC_C, KC_V, COMBO_END};
+const uint16_t PROGMEM jump_to_nav_q[] =  {LT(0, KC_C), LT(0, KC_V), COMBO_END};
+const uint16_t PROGMEM jump_to_nav_c[] = {KC_D, LT(0, KC_V), COMBO_END};
+const uint16_t PROGMEM jump_to_qwerty[] =  {KC_G, KC_M, COMBO_END};
+const uint16_t PROGMEM jump_to_colemak[] =  {KC_G, KC_H, COMBO_END};
 
 combo_t key_combos[] = {
+    // Bootloader to flash the microcontroller
     COMBO(bootloader_1, QK_BOOTLOADER),
     COMBO(bootloader_2, QK_BOOTLOADER),
+
+    // another way to type single quotes
     COMBO(single_quote, KC_QUOT),
-    COMBO(jump_to_nav,  TO(_NAV)),
-    COMBO(jump_to_nav2, TO(_NAV)),
+
+    // move to nav layer from qwerty and colemak, respectively
+    COMBO(jump_to_nav_q,  TO(_NAV)),
+    COMBO(jump_to_nav_c, TO(_NAV)),
+
+    // set the default layer.
+    COMBO(jump_to_qwerty, DF(_QWER)),
+    COMBO(jump_to_colemak, DF(_COLE)),
 };
 
 
+// HELD KEYS
+// Refined Handling of held keys (mainly to learn how to do it)
 // Change the behaviour of some keys when they are held down
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
@@ -169,6 +211,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     return true;
 }
 
+
+// RETRO TAPPING
 // ensure RETRO_TAPPING is not applied to C, V, X, Enter or BackSpace
 // when we held down C, we got copy (Ctrl+C) but with an extra C - we are removing this output
 bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
@@ -187,9 +231,31 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 }
 
 
+// TAPPING TERM
+// More refined control for tapping_term,
+// The home mods are usually good, apart from A, because it is on the pinky.
+// This prevents my slow pinky from accidentally triggering the GUI key.
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        // Double the tapping_term for A, on both Colemak and Qwerty
+        case LGUI_T(KC_A):
+            return TAPPING_TERM + TAPPING_TERM;
+
+        // Double the tapping_term for O, on Colemak
+        case RGUI_T(KC_O):
+            return TAPPING_TERM + TAPPING_TERM;
+
+        // Double the tapping_term for O, on Qwerty
+        case RGUI_T(KC_SCLN):
+            return TAPPING_TERM + TAPPING_TERM;
+
+        default:
+            return TAPPING_TERM;
+    }
+}
 
 
-
+// TAPDANCE
 // a type for the states we need
 typedef enum {
      TD_NONE,
@@ -200,24 +266,19 @@ typedef enum {
 
 // a global instance of the tapdance state
 static td_state_t td_state;
-//
-//
+
 // determines the current state of the tapdance
 td_state_t cur_dance(tap_dance_state_t *state);
-//
-//
+
 // finished functions for each tap dance
 void sym_dance_finished(tap_dance_state_t *state, void *user_data);
 void num_dance_finished(tap_dance_state_t *state, void *user_data);
 void nav_dance_finished(tap_dance_state_t *state, void *user_data);
-void base_dance_finished(tap_dance_state_t *state, void *user_data);
-//
+
 // reset functions for each tap dance
 void sym_dance_reset(tap_dance_state_t *state, void *user_data);
 void num_dance_reset(tap_dance_state_t *state, void *user_data);
 void nav_dance_reset(tap_dance_state_t *state, void *user_data);
-void base_dance_reset(tap_dance_state_t *state, void *user_data);
-//
 
 // Determine the tapdance state to return
 td_state_t cur_dance(tap_dance_state_t *state) {
@@ -283,6 +344,7 @@ void nav_dance_finished(tap_dance_state_t *state, void *user_data) {
     }
 }
 
+
 void nav_dance_reset(tap_dance_state_t *state, void *user_data) {
     switch (td_state) {
         case TD_SINGLE_TAP: clear_oneshot_layer_state(ONESHOT_PRESSED); break;
@@ -291,32 +353,12 @@ void nav_dance_reset(tap_dance_state_t *state, void *user_data) {
     }
 }
 
-// BASE DANCE
-// Handle the possible states for each tapdance keycode you define:
-void base_dance_finished(tap_dance_state_t *state, void *user_data) {
-    td_state = cur_dance(state);
-    switch (td_state) {
-        case TD_SINGLE_TAP: set_oneshot_layer(_BASE, ONESHOT_START); break;
-        case TD_DOUBLE_SINGLE_TAP: clear_oneshot_layer_state(ONESHOT_PRESSED); layer_move(_BASE); break;
-        default: break;
-    }
-}
-
-void base_dance_reset(tap_dance_state_t *state, void *user_data) {
-    switch (td_state) {
-        case TD_SINGLE_TAP: clear_oneshot_layer_state(ONESHOT_PRESSED); break;
-        case TD_DOUBLE_SINGLE_TAP: break;
-        default: break;
-    }
-}
-
-
-
 // Define `ACTION_TAP_DANCE_FN_ADVANCED()` for each tapdance keycode, passing in `finished` and `reset` functions
 tap_dance_action_t tap_dance_actions[] = {
     [SYM_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, sym_dance_finished, sym_dance_reset),
     [NUM_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, num_dance_finished, num_dance_reset),
     [NAV_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, nav_dance_finished, nav_dance_reset),
-    [BASE_D] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, base_dance_finished, base_dance_reset)
 };
 
+
+// END
