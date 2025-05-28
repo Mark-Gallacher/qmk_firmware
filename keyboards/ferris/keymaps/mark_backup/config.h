@@ -14,12 +14,13 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+// this just ensures we are overwriting any other config file relevant to our keymaps
 #pragma once
 
 // The time in milliseconds of when a tap becomes a hold
 #undef TAPPING_TERM
-#define TAPPING_TERM 240
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
 
 // The time in milliseconds for a double tap and hold to output string of letters
 // is you wanted to type llllllllllll, but had LSFT_T(KC_L), you need to tap L twice
@@ -37,3 +38,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MODS_TO_NEUTRALIZE { MOD_BIT(KC_LEFT_ALT), MOD_BIT(KC_LEFT_GUI), MOD_BIT(KC_RIGHT_GUI) }
 
 #define EE_HANDS
+
+// #define ONESHOT_TAP_TOGGLE 25
+// #define ONESHOT_TIMEOUT 5000
