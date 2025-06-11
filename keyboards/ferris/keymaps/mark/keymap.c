@@ -8,6 +8,7 @@
 #define UK_EURO ALGR(UK_4)    // €
 #define UK_HASH KC_NUHS // #
 #define UK_BSLS KC_NUBS // (backslash)
+#define UK_PIPE S(UK_BSLS) // (pipe)
 #define UK_DQUO S(UK_2)    // "
 #define UK_QUOT KC_QUOT // '
 #define UK_AT   S(UK_QUOT) // @
@@ -79,7 +80,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT(
 // ||----<ESCAPE>----|------ ++ ------|-------\|-------|-------/?-------|------ || ------|| ||-------""-------|-------[[-------|-------]]-------|-------!!-------|------ '' ------||
-        KC_ESCAPE,         KC_PLUS,         UK_BSLS,         KC_SLSH,         KC_PIPE,             UK_DQUO,        KC_LBRC,         KC_RBRC,         KC_EXLM,          KC_QUOT,
+        KC_ESCAPE,         KC_PLUS,         UK_BSLS,         KC_SLSH,         UK_PIPE,             UK_DQUO,        KC_LBRC,         KC_RBRC,         KC_EXLM,          KC_QUOT,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-----<TAB>------|------ -- ------|------ =+ ------|------ __ ------|-------%%-------|| ||------&&--------|-------((-------|-------))-------|-------**-------|-------;;-------||
           KC_TAB,          KC_MINS,         KC_EQL,          KC_UNDS,         KC_PERC,             KC_AMPR,        KC_LPRN,         KC_RPRN,         KC_ASTR,          KC_SCLN,
