@@ -22,6 +22,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 200
 #define TAPPING_TERM_PER_KEY
 
+// If MT or LT keys are pressed after X milliseconds after another key,
+// automatically trigger the tapped event instead of checking for hold event
+#define FLOW_TAP_TERM 150
+
 // The time in milliseconds for a double tap and hold to output string of letters
 // is you wanted to type llllllllllll, but had LSFT_T(KC_L), you need to tap L twice
 // But the second time needs to occur in this window - I want to disable this option

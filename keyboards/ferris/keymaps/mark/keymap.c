@@ -33,7 +33,8 @@
 // add number layer, and maybe a macro layer too
 enum layers {
     _QWER,
-    _COLE,
+    _FOCAL,
+    _GALLIUM,
     _SYM,
     _NAV,
     _NUM,
@@ -63,15 +64,30 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     ),
 
-  [_COLE] = LAYOUT(
-// ||-------QQ-------|-------WW-------|-------FF-------|-------PP-------|-------BB-------|| ||-------JJ-------|-------LL-------|-------UU-------|-------YY-------|-------;;-------||
-           KC_Q,            KC_W,            KC_F,            KC_P,            KC_B,                KC_J,            KC_L,            KC_U,            KC_Y,           KC_SCLN,
+  [_FOCAL] = LAYOUT(
+// ||-------VV-------|-------LL-------|-------HH-------|-------GG-------|-------JJ-------|| ||-------QQ-------|-------FF-------|-------OO-------|-------UU-------|-------JJ-------||
+           KC_V,            KC_L,            KC_H,            KC_G,            KC_J,                KC_Q,            KC_F,            KC_O,            KC_U,           KC_J,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
-// ||-------AA-------|-------RR-------|-------SS-------|-------TT-------|-------GG-------|| ||-------MM-------|-------NN-------|-------EE-------|-------II-------|-------OO-------||
-       LGUI_T(KC_A),    LALT_T(KC_R),    LSFT_T(KC_S),    LCTL_T(KC_T),        KC_G,                KC_M,        RCTL_T(KC_N),    RSFT_T(KC_E),    LALT_T(KC_I),    RGUI_T(KC_O),
+// ||-------SS-------|-------RR-------|-------NN-------|-------TT-------|-------BB-------|| ||-------YY-------|-------CC-------|-------AA-------|-------EE-------|-------II-------||
+       LGUI_T(KC_S),    LALT_T(KC_R),    LSFT_T(KC_N),    LCTL_T(KC_T),        KC_B,                KC_Y,        RCTL_T(KC_C),    RSFT_T(KC_A),    LALT_T(KC_E),    RGUI_T(KC_I),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
-// ||-------ZZ-------|-------XX-------|-------CC-------|-------DD-------|-------VV-------|| ||-------KK-------|-------HH-------|-------,<-------|-------.>-------|-------/?-------||
-           KC_Z,         LT(0, KC_X),     LT(0, KC_C),        KC_D,        LT(0, KC_V),             KC_K,            KC_H,           KC_COMM,         KC_DOT,         KC_SLSH,
+// ||-------ZZ-------|-------XX-------|-------MM-------|-------DD-------|-------PP-------|| ||-------''-------|-------WW-------|-------.>-------|-------;;-------|-------,<-------||
+           KC_Z,            KC_X,            KC_M,            KC_D,            KC_P,               KC_QUOT,          KC_W,           KC_DOT,         KC_SCLN,         KC_COMM,
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------------------------------------------------||----------------|----<SPACE>-----|| ||--<BACKSPACE>---|----------------||
+		    					                            TD(NUM_D),    LT(0, KC_SPACE),    LT(0, KC_BSPC),     TD(SYM_D)
+// ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
+    ),
+
+  [_GALLIUM] = LAYOUT(
+// ||-------BB-------|-------LL-------|-------DD-------|-------CC-------|-------VV-------|| ||-------JJ-------|-------YY-------|-------OO-------|-------UU-------|-------,<-------||
+           KC_B,            KC_L,            KC_D,            KC_C,            KC_V,                KC_J,            KC_Y,            KC_O,            KC_U,           KC_COMM,
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------NN-------|-------RR-------|-------TT-------|-------SS-------|-------GG-------|| ||-------PP-------|-------HH-------|-------AA-------|-------EE-------|-------II-------||
+       LGUI_T(KC_N),    LALT_T(KC_R),    LSFT_T(KC_T),    LCTL_T(KC_S),        KC_G,                KC_P,        RCTL_T(KC_H),    RSFT_T(KC_A),    LALT_T(KC_E),    RGUI_T(KC_I),
+// ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
+// ||-------XX-------|-------QQ-------|-------MM-------|-------WW-------|-------ZZ-------|| ||-------KK-------|-------FF-------|-------''-------|-------;;-------|-------.>-------||
+           KC_X,            KC_Q,            KC_M,            KC_W,            KC_Z,                KC_K,            KC_F,           KC_QUOT,         KC_SCLN,         KC_DOT,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|----<SPACE>-----|| ||--<BACKSPACE>---|----------------||
 		    					                            TD(NUM_D),    LT(0, KC_SPACE),    LT(0, KC_BSPC),     TD(SYM_D)
@@ -82,8 +98,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // ||----<ESCAPE>----|------ ++ ------|-------\|-------|-------/?-------|------ || ------|| ||-------""-------|-------[[-------|-------]]-------|-------!!-------|------ '' ------||
         KC_ESCAPE,         KC_PLUS,         UK_BSLS,         KC_SLSH,         UK_PIPE,             UK_DQUO,        KC_LBRC,         KC_RBRC,         KC_EXLM,          KC_QUOT,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
-// ||-----<TAB>------|------ -- ------|------ =+ ------|------ __ ------|-------%%-------|| ||------&&--------|-------((-------|-------))-------|-------**-------|-------;;-------||
-          KC_TAB,          KC_MINS,         KC_EQL,          KC_UNDS,         KC_PERC,             KC_AMPR,        KC_LPRN,         KC_RPRN,         KC_ASTR,          KC_SCLN,
+// ||-----<TAB>------|------ -- ------|------ =+ ------|------ __ ------|-------%%-------|| ||------&&--------|-------((-------|-------))-------|-------**-------|-------::-------||
+          KC_TAB,          KC_MINS,         KC_EQL,          KC_UNDS,         KC_PERC,             KC_AMPR,        KC_LPRN,         KC_RPRN,         KC_ASTR,          KC_COLN,
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||------ `~ ------|-------<<-------|------->>-------|-------$$-------|-------@@-------|| ||-------##-------|-------{{-------|-------}}-------|-------^^-------|------ ~~ ------||
           UK_GRV,          KC_LT,           KC_GT,           KC_DLR,          UK_AT,               UK_HASH,        KC_LCBR,         KC_RCBR,         KC_CIRC,          UK_TILD,
@@ -92,6 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                            TG(_SYM),    LCTL_T(KC_SPACE),    LSFT_T(KC_BSPC),     TD(NUM_D)
 // ||-------------------------------------------------||----------------|----------------|| ||----------------|----------------||
     ),
+
 
   [_NAV] = LAYOUT(
 
@@ -110,13 +127,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
 
   [_NUM] = LAYOUT(
-// ||----<ESCAPE>----|-------77-------|-------88-------|-------99-------|------ ++ ------|| ||-------''-------|-------££-------|------$$--------|-------€€-------|---<BACKSPACE>--||
-        KC_ESCAPE,          KC_7,            KC_8,            KC_9,          KC_PLUS,             KC_QUOT,          UK_PND,          UK_DLR,          UK_EURO,      LT(0, KC_BSPC),
+// ||----<ESCAPE>----|-------//-------|-------**-------|------ -- ------|------ ++ ------|| ||-------''-------|-------££-------|------$$--------|-------€€-------|---<BACKSPACE>--||
+        KC_ESCAPE,        KC_SLSH,        KC_ASTR,          KC_MINS,        KC_PLUS,             KC_QUOT,          UK_PND,          UK_DLR,          UK_EURO,      LT(0, KC_BSPC),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
-// ||-------**-------|-------44-------|-------55-------|-------66-------|------ 00 ------|| ||--<ARROW-DOWN>--|---<ARROW-UP>---|--<ARROW-LEFT>--|--<ARROW-RGHT>--|----<ENTER>-----||
-         KC_ASTR,           KC_4,            KC_5,            KC_6,            KC_0,              KC_LEFT,          KC_DOWN,         KC_UP,          KC_RGHT,       LT(0, KC_SPACE),
-// ||-------//-------|-------11-------|-------22-------|-------33-------|------ -- ------|| ||-------^^-------|-------%%-------|------ ,, ------|------ .. ------|----------------||
-         KC_SLSH,           KC_1,            KC_2,            KC_3,          KC_MINUS,             KC_CIRC,          KC_PERC,       KC_COMM,          KC_DOT,         TO(_FUNC),
+// ||-------55-------|-------44-------|-------33-------|-------22-------|-------11-------|| ||--<ARROW-LEFT>--|---<ARROW-DOWN>---|--<ARROW-UP>--|--<ARROW-RGHT>--|----<ENTER>-----||
+           KC_5,            KC_4,            KC_3,            KC_2,            KC_1,             KC_LEFT,          KC_DOWN,         KC_UP,          KC_RGHT,       LT(0, KC_SPACE),
+// ||-------00-------|-------99-------|-------88-------|-------77-------|-------66-------|| ||-------^^-------|-------%%-------|------ ,, ------|------ .. ------|----------------||
+           KC_0,            KC_9,            KC_8,            KC_7,            KC_6,             KC_CIRC,          KC_PERC,       KC_COMM,          KC_DOT,         TO(_FUNC),
 // ||----------------|----------------|----------------|----------------|----------------|| ||----------------|----------------|----------------|----------------|----------------||
 // ||-------------------------------------------------||----------------|-----<CTRL>-----|| ||-----<SHIFT>----|----------------||
 		    					                            TG(_NUM),        KC_LGUI,             KC_LSFT,       TO(_SYM)
@@ -145,9 +162,12 @@ const uint16_t PROGMEM bootloader_1[] = {KC_F10, KC_F12, COMBO_END};
 const uint16_t PROGMEM bootloader_2[] = {KC_SLEP, LCTL(LALT(KC_DEL)), COMBO_END};
 const uint16_t PROGMEM single_quote[] = {KC_COMM, KC_DOT, COMBO_END};
 const uint16_t PROGMEM jump_to_nav_q[] =  {LT(0, KC_C), LT(0, KC_V), COMBO_END};
-const uint16_t PROGMEM jump_to_nav_c[] = {KC_D, LT(0, KC_C), COMBO_END};
-const uint16_t PROGMEM jump_to_qwerty[] =  {KC_G, KC_M, COMBO_END};
-const uint16_t PROGMEM jump_to_colemak[] =  {KC_G, KC_H, COMBO_END};
+const uint16_t PROGMEM jump_to_nav_f[] = {KC_D, KC_M, COMBO_END};
+const uint16_t PROGMEM jump_to_nav_g[] = {KC_W, KC_M, COMBO_END};
+const uint16_t PROGMEM jump_to_qwerty_f[] =  {KC_B, KC_Y, COMBO_END};
+const uint16_t PROGMEM jump_to_qwerty_g[] =  {KC_G, KC_P, COMBO_END};
+const uint16_t PROGMEM jump_to_focal[] =  {KC_G, KC_H, COMBO_END};
+const uint16_t PROGMEM jump_to_gallium[] =  {KC_Y, KC_T, COMBO_END};
 
 combo_t key_combos[] = {
     // Bootloader to flash the microcontroller
@@ -159,11 +179,14 @@ combo_t key_combos[] = {
 
     // move to nav layer from qwerty and colemak, respectively
     COMBO(jump_to_nav_q,  TO(_NAV)),
-    COMBO(jump_to_nav_c, TO(_NAV)),
+    COMBO(jump_to_nav_f, TO(_NAV)),
+    COMBO(jump_to_nav_g, TO(_NAV)),
 
     // set the default layer.
-    COMBO(jump_to_qwerty, DF(_QWER)),
-    COMBO(jump_to_colemak, DF(_COLE)),
+    COMBO(jump_to_qwerty_f, DF(_QWER)),
+    COMBO(jump_to_qwerty_g, DF(_QWER)),
+    COMBO(jump_to_focal, DF(_FOCAL)),
+    COMBO(jump_to_gallium, DF(_GALLIUM)),
 };
 
 
@@ -179,6 +202,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;             // Return true for normal processing of tap keycode
+
         // C
         case LT(0, KC_C):
             if (!record->tap.count && record->event.pressed) {
@@ -186,6 +210,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;             // Return true for normal processing of tap keycode
+
         // V
         case LT(0, KC_V):
             if (!record->tap.count && record->event.pressed) {
@@ -193,6 +218,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;             // Return true for normal processing of tap keycode
+
         // BackSpace
         case LT(0, KC_BSPC):
             if (!record->tap.count && record->event.pressed) {
@@ -200,6 +226,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
             return true;
+
         // Space
         case LT(0, KC_SPC):
             if (!record->tap.count && record->event.pressed) {
@@ -238,12 +265,20 @@ bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
 // This prevents my slow pinky from accidentally triggering the GUI key.
 uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        // Double the tapping_term for A, on both Colemak and Qwerty
+        // Double the tapping_term for A, on Qwerty
         case LGUI_T(KC_A):
             return TAPPING_TERM + TAPPING_TERM;
 
-        // Double the tapping_term for O, on Colemak
-        case RGUI_T(KC_O):
+        // Double the tapping_term for S, on Focal
+        case LGUI_T(KC_S):
+            return TAPPING_TERM + TAPPING_TERM;
+
+        // Double the tapping_term for N, on Gallium
+        case LGUI_T(KC_S):
+            return TAPPING_TERM + TAPPING_TERM;
+
+        // Double the tapping_term for I, on Focal and Gallium
+        case RGUI_T(KC_I):
             return TAPPING_TERM + TAPPING_TERM;
 
         // Double the tapping_term for O, on Qwerty
